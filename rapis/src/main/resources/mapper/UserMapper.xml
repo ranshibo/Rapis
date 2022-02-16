@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.rapis.dao.UserMapper">
+    <sql id="insertFields">
+        username, password, salt, email,telephone, type, status, header_url
+    </sql>
+
+    <insert id="insertUser">
+        insert into user (<include refid="insertFields"></include>)
+        values (#{username},#{password},#{salt},#{email},#{telephone},#{type},#{status},#{headerUrl})
+    </insert>
+
+    <select id="getUserByName" resultType="com.rapis.entity.User">
+        select * from user where username=#{name}
+    </select>
+</mapper>
