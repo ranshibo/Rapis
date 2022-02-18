@@ -15,7 +15,7 @@ public enum CodeMsg {
     REGISTER_NAME_EXIST(100002, "该用户名已被注册"),
     LOGIN_SUCCESS(100003, "登陆成功"),
     LOGIN_NAME_NOTEXIST(100004, "该用户名未注册"),
-    LOGIN_PASSWORD_INCORRECT(100005, "密码错误"),
+    LOGIN_INCORRECT(100005, "用户名、密码或验证码错误"),
     INPUT_BLANK(100006, "用户名、密码或验证码不能为空"),
     LOGIN_NOT(100007, "用户未登录");
     private int code;

@@ -5,6 +5,7 @@ import com.rapis.dao.UserMapper;
 import com.rapis.entity.User;
 import com.rapis.service.UserService;
 import com.rapis.util.CodeMsg;
+import com.rapis.util.CommonUtil;
 import com.rapis.util.RedisKeyUtil;
 import com.rapis.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
@@ -39,6 +39,11 @@ public class UserServiceImpl implements UserService {
             return Result.result(CodeMsg.INPUT_BLANK);
         if (userMapper.getUserByName(user.getUsername()) != null)
             return Result.result(CodeMsg.REGISTER_NAME_EXIST);
+        String salt = CommonUtil.getUUID().substring(0,8);
+        user.setSalt(salt);
+        user.setPassword(CommonUtil.md5(salt+user.getPassword()));
+        user.setType(0);
+        user.setStatus(0);
         userMapper.insertUser(user);
         return Result.result(CodeMsg.REGISTER_SUCCESS);
     }
@@ -50,9 +55,9 @@ public class UserServiceImpl implements UserService {
         User dbUser = userMapper.getUserByName(user.getUsername());
         if (dbUser == null)
             return Result.result(CodeMsg.LOGIN_NAME_NOTEXIST);
-        if (!dbUser.getPassword().equals(user.getPassword()))
-            return Result.result(CodeMsg.LOGIN_PASSWORD_INCORRECT);
-        String token = UUID.randomUUID().toString().replaceAll("-", "");
+        if (!dbUser.getPassword().equals(CommonUtil.md5(dbUser.getSalt()+user.getPassword())))
+            return Result.result(CodeMsg.LOGIN_INCORRECT);
+        String token = CommonUtil.getUUID();
         String redisKey = RedisKeyUtil.getTOKENKey(token);
         redisTemplate.opsForValue().set(redisKey, user.getUsername(), EXPRIE_TIME, TimeUnit.SECONDS);
         Cookie cookie = new Cookie(cookieTokenName, token);
