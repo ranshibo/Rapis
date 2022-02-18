@@ -16,6 +16,8 @@ public class CodeMsg {
     public static CodeMsg LOGIN_SUCCESS = new CodeMsg(100003, "登陆成功");
     public static CodeMsg LOGIN_NAME_NOTEXIST = new CodeMsg(100004, "该用户名未注册");
     public static CodeMsg LOGIN_PASSWORD_INCORRECT = new CodeMsg(100005, "密码错误");
+    public static CodeMsg INPUT_BLANK = new CodeMsg(100006, "用户名、密码或验证码不能为空");
+    public static CodeMsg LOGIN_NOT = new CodeMsg(100007, "用户未登录");
     private CodeMsg(int code, String msg) {
         this.code = code;
         this.msg = msg;
