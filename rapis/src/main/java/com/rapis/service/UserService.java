@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 public interface UserService {
-    Result<String> Register(User user);
+    Result<String> Register(User user) throws Exception;
 
     Result<String> Login(User user, HttpServletResponse httpServletResponse);
 

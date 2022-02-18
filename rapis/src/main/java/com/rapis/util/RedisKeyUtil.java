@@ -4,7 +4,7 @@ package com.rapis.util;
  * @author siboran
  * @create 2022/2/18
  */
-public class RedisKeyUtil {
+public final class RedisKeyUtil {
     private static final String SPLIT = ":";
     private static final String PREFIX_TOKEN = "token";
 

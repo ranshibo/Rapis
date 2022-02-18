@@ -3,13 +3,16 @@
 
 
 <mapper namespace="com.rapis.dao.UserMapper">
-    <sql id="insertFields">
+    <sql id="commonFields">
+        create_by,create_time,update_by,update_time
+    </sql>
+    <sql id="userFields">
         username, password, salt, email,telephone, type, status, header_url
     </sql>
 
     <insert id="insertUser">
-        insert into user (<include refid="insertFields"></include>)
-        values (#{username},#{password},#{salt},#{email},#{telephone},#{type},#{status},#{headerUrl})
+        insert into user (<include refid="userFields"></include>,<include refid="commonFields"></include>)
+        values (#{username},#{password},#{salt},#{email},#{telephone},#{type},#{status},#{headerUrl},#{createBy},#{createTime},#{updateBy},#{updateTime})
     </insert>
 
     <select id="getUserByName" resultType="com.rapis.entity.User">

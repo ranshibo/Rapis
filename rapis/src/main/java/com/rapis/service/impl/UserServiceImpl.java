@@ -4,10 +4,7 @@ import com.rapis.controller.exception.GlobalException;
 import com.rapis.dao.UserMapper;
 import com.rapis.entity.User;
 import com.rapis.service.UserService;
-import com.rapis.util.CodeMsg;
-import com.rapis.util.CommonUtil;
-import com.rapis.util.RedisKeyUtil;
-import com.rapis.util.Result;
+import com.rapis.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -34,7 +31,7 @@ public class UserServiceImpl implements UserService {
     RedisTemplate<String, Object> redisTemplate;
 
     @Override
-    public Result<String> Register(User user) {
+    public Result<String> Register(User user) throws Exception {
         if (StringUtils.isBlank(user.getUsername()) || StringUtils.isBlank(user.getPassword()))
             return Result.result(CodeMsg.INPUT_BLANK);
         if (userMapper.getUserByName(user.getUsername()) != null)
@@ -44,6 +41,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(CommonUtil.md5(salt+user.getPassword()));
         user.setType(0);
         user.setStatus(0);
+        DbUtil.addCreateInfo(user,DbUtil.ADMIN);
         userMapper.insertUser(user);
         return Result.result(CodeMsg.REGISTER_SUCCESS);
     }

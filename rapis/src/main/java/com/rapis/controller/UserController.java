@@ -22,7 +22,7 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<Result<String>> regiseter(@RequestBody User user) {
+    public ResponseEntity<Result<String>> regiseter(@RequestBody User user) throws Exception {
         return ResponseEntity.ok(userService.Register(user));
     }
 
@@ -31,7 +31,8 @@ public class UserController {
         return ResponseEntity.ok(userService.Login(user, httpServletResponse));
     }
 
-    @GetMapping("/user")
-    public void getuser(HttpServletResponse httpServletResponse) {
+    @GetMapping("/setting")
+    public ResponseEntity<String> getuser(HttpServletRequest httpServletRequest) throws Exception {
+       return ResponseEntity.ok(userService.getUser(httpServletRequest));
     }
 }

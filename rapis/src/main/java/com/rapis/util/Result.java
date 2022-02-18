@@ -7,7 +7,7 @@ import lombok.Data;
  * @create 2022/2/16
  */
 @Data
-public class Result<T> {
+public final class Result<T> {
     private int code;
     private String msg;
     private T data;
