@@ -7,6 +7,7 @@ package com.rapis.util;
 public class RedisKeyUtil {
     private static final String SPLIT = ":";
     private static final String PREFIX_TOKEN = "token";
+
     // 登录的凭证
     public static String getTOKENKey(String token) {
         return PREFIX_TOKEN + SPLIT + token;

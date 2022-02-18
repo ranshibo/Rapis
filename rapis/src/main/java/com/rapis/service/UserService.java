@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface UserService {
     Result<String> Register(User user);
+
     Result<String> Login(User user, HttpServletResponse httpServletResponse);
-    Result<String> getUser(HttpServletRequest httpServletRequest);
+
+    String getUser(HttpServletRequest httpServletRequest) throws Exception;
 }

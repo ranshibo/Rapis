@@ -13,6 +13,8 @@
     </insert>
 
     <select id="getUserByName" resultType="com.rapis.entity.User">
-        select * from user where username=#{name}
+        select *
+        from user
+        where username = #{name}
     </select>
 </mapper>
