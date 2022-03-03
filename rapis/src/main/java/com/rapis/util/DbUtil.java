@@ -1,8 +1,5 @@
 package com.rapis.util;
 
-import org.springframework.stereotype.Component;
-
-import javax.print.DocFlavor;
 import java.lang.reflect.Method;
 import java.util.Date;
 

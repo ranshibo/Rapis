@@ -61,7 +61,20 @@ public class UserServiceImpl implements UserService {
         Cookie cookie = new Cookie(cookieTokenName, token);
         cookie.setMaxAge(EXPRIE_TIME);
         httpServletResponse.addCookie(cookie);
-        return Result.result(CodeMsg.LOGIN_SUCCESS);
+        return Result.result(CodeMsg.LOGIN_SUCCESS,token);
+    }
+
+    @Override
+    public Result<String> logout(HttpServletRequest httpServletRequest) {
+        Cookie[] cookies = httpServletRequest.getCookies();
+        for (Cookie cookie : cookies) {
+            if (cookieTokenName.equals(cookie.getName())) {
+                String redisKey = RedisKeyUtil.getTOKENKey(cookie.getValue());
+                redisTemplate.delete(redisKey);
+                return Result.result(CodeMsg.LOGOUT_SUCCESS);
+            }
+        }
+        return Result.result(CodeMsg.LOGIN_NOT);
     }
 
     @Override

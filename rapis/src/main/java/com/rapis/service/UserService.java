@@ -17,5 +17,7 @@ public interface UserService {
 
     Result<String> Login(User user, HttpServletResponse httpServletResponse);
 
+    Result<String> logout(HttpServletRequest httpServletRequest);
+
     String getUser(HttpServletRequest httpServletRequest) throws Exception;
 }

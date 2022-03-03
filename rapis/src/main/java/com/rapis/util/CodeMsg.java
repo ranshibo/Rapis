@@ -17,7 +17,8 @@ public enum CodeMsg {
     LOGIN_NAME_NOTEXIST(100004, "该用户名未注册"),
     LOGIN_INCORRECT(100005, "用户名、密码或验证码错误"),
     INPUT_BLANK(100006, "用户名、密码或验证码不能为空"),
-    LOGIN_NOT(100007, "用户未登录");
+    LOGIN_NOT(100007, "用户未登录"),
+    LOGOUT_SUCCESS(100008,"登出成功");
     private int code;
     private String msg;
 
