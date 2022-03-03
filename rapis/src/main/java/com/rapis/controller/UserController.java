@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @CrossOrigin
+@RequestMapping("/user")
 public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
